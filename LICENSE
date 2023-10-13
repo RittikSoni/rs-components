@@ -1,5 +1,0 @@
-In the code above, replace your_org_name with your organization's name and your_package_name with your package's name. You can also replace MIT with the license you prefer, such as BSD, Apache 2.0, or another open-source license.
-
-Make sure you include a copy of the full license text (in this case, the MIT License) in a separate file within your package, typically named LICENSE. You should also provide a notice in your package's README.md file indicating the license you've chosen and include a link to the full license text in the LICENSE file. This makes it clear to users and developers how your code can be used and distributed.
-
-Please note that if you're unsure about which license to choose or if you have specific legal or licensing requirements, it's a good idea to consult with a legal professional to ensure your choice aligns with your project's goals.
