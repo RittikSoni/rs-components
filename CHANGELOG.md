@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+A collection of reusable Flutter components for building amazing apps.
