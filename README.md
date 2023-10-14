@@ -24,7 +24,7 @@ dependencies:
 
 ## Contribution
 
-We welcome contributions from the open-source community. If you have improvements, bug fixes, or additional components to add, please follow our [Contribution Guidelines](CONTRIBUTING).
+We welcome contributions from the open-source community. If you have improvements, bug fixes, or additional components to add, please follow our [Contribution Guidelines](CONTRIBUTING.md).
 
 This project is licensed under the terms of the [MIT License](LICENSE).
 
