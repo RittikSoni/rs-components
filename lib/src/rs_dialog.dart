@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Custom dialog which can be reused easily.
+/// Reusable Custom Dialog
 class RsDialog {
   static Future<void> show(
     BuildContext context, {

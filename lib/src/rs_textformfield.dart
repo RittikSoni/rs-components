@@ -26,10 +26,19 @@ class RsTextFormField extends StatelessWidget {
     this.borderRadius = 20.0,
     this.contentPadding = 12.0,
     this.counterText = "",
+    this.suffixIcon,
+    this.autoFocus = false,
+    this.textInputAction,
+    this.errorText,
     super.key,
+    this.validationMinLength = 4,
+    this.validationMaxLength = 255,
+    // this.hasInteracted = true,
   });
 
   final TextEditingController controller;
+
+  final Widget? suffixIcon;
 
   final String label;
 
@@ -69,6 +78,9 @@ class RsTextFormField extends StatelessWidget {
   final bool? obscureText;
 
   /// Default is `false`
+  final bool? autoFocus;
+
+  /// Default is `false`
   final bool? addEmailValidation;
 
   /// Default is `true`
@@ -79,6 +91,12 @@ class RsTextFormField extends StatelessWidget {
 
   /// Default is `false`
   final bool? readOnly;
+
+  /// Default is `4` characters.
+  final int? validationMinLength;
+
+  /// Default is `255` characters.
+  final int? validationMaxLength;
 
   /// Default is `255` characters.
   final int? maxLength;
@@ -97,6 +115,8 @@ class RsTextFormField extends StatelessWidget {
 
   final TextStyle? textStyle;
 
+  final String? errorText;
+
   /// e.g.
   ///
   /// ```dart
@@ -111,19 +131,53 @@ class RsTextFormField extends StatelessWidget {
   /// ```
   final List<TextInputFormatter>? inputFormatters;
 
+  /// Default is `TextInputAction.next`
+  final TextInputAction? textInputAction;
+
+  /// ## CURRENTLY UN-STABLE
+  /// Default is `True`
+  ///
+  /// By this it will check in real-time only those fields which user has
+  /// already interacted.
+  ///
+  /// e.g.
+  ///    1. add this to your form
+  ///
+  /// ```dart
+  ///              Form(
+  ///                    key: formKey,
+  ///                    autovalidateMode: AutovalidateMode.onUserInteraction,
+  /// ```
+  ///   2. if using default Validator just pass the `hasInteracted` with onChange
+  ///
+  /// eg.
+  /// ```dart
+  ///           hasInteracted: textFormFieldController.text.isNotEmpty,
+  ///           onChanged: (p0) => setState(() {}),
+  ///```
+  ///
+  ///WARNING!: FOR CUSTOM VALIDATOR USE ACCORDINGLY.
+  // final bool? hasInteracted;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: textInputAction ?? TextInputAction.next,
+      autofocus: autoFocus!,
       controller: controller,
       validator: validator ??
           (String? value) {
-            if (controller.text.trim().length < 4 ||
-                controller.text.trim().length > 255) {
-              return "It should be 4 to 255 characters long.";
+            // if (hasInteracted!) {
+            if (controller.text.trim().length < (validationMinLength ?? 4) ||
+                controller.text.trim().length > (validationMaxLength ?? 255)) {
+              return (validationMaxLength == validationMinLength)
+                  ? 'Must be $validationMinLength characters long.'
+                  : "Must be ${(validationMinLength)} to ${(validationMaxLength)} characters long.";
             } else if (!isEmailValid(controller.text.trim()) &&
                 addEmailValidation!) {
               return 'Please enter a valid email address';
             }
+            // }
             return null;
           },
       onChanged: onChanged,
@@ -142,12 +196,14 @@ class RsTextFormField extends StatelessWidget {
       readOnly: readOnly!,
       style: textStyle,
       decoration: InputDecoration(
+        errorText: errorText,
         alignLabelWithHint: alignLabelWithHint,
         labelText: label,
         hintText: hintText,
         hintStyle: hintTextStyle,
         filled: true,
         counterText: counterText,
+        suffixIcon: suffixIcon,
         contentPadding: EdgeInsets.all(contentPadding!),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius!),

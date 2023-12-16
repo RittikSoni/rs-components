@@ -1,6 +1,6 @@
-name: rs_components
+name: reusable_components
 description: A collection of reusable Flutter components for building amazing apps.
-version: 0.0.1
+version: 0.1.1
 homepage:
 repository: https://github.com/RittikSoni/rs-components
 license: MIT

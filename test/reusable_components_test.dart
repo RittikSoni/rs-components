@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rs_components/rs_dialog.dart';
+import 'package:reusable_components/src/rs_dialog.dart';
 
 void main() {
   testWidgets('RsDialog displays title and content',
